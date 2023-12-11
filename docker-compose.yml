@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+  web:
+    container_name: app_messenger
+    build:
+      context: .    # Весь текущий каталог отправить в образ докер
+      dockerfile: Dockerfile
+    image: php:8.2-apache   # PHP 8.2 и веб-сервер Apache
+    env_file:
+      - .env
+    ports:
+      - "8080:80"   # Прокидываем порт 8080 на хосте к порту 80 внутри контейнера. Можно обращаться к веб-серверу по адресу http://localhost:8080
+    volumes:
+      - ./app:/var/www/html   # Монтируем локальную директорию ./app внутрь контейнера по пути /var/www/html . Позволяет изменять код в проекте на хосте, изменения будут отражены внутри контейнера без пересоздания образа
+    depends_on:
+      - mysql
+    networks:
+      - messengernet
+
+  mysql:
+    container_name: mysql_messenger
+    image: mysql:8.0
+    env_file:
+      - .env
+    volumes:
+      - mysql_data:/var/lib/mysql/
+    ports:
+      - "3306:3306"   # Пробрасываем порт 3306 на хосте к порту 3306 внутри контейнера
+    restart: always
+    networks:
+      - messengernet
+
+volumes:
+  mysql_data:
+
+networks:
+  messengernet:
+    name: messengernet
