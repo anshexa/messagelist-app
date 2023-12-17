@@ -12,8 +12,8 @@ class CommentView
         <?php
         foreach ($comments as $comment) { ?>
             <div class="comment">
-                <p><em><?= $comment["author"] ?></em></p>
-                <p><?= $comment["text"] ?></p>
+                <p><em><?= htmlspecialchars($comment["author"]) ?></em></p>
+                <p><?= htmlspecialchars($comment["text"]) ?></p>
             </div>
             <hr>
             <?php

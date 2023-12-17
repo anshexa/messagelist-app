@@ -1,3 +1,7 @@
+<?php
+// разрешаем загружать исполняемые скрипты только с текущего домена для защиты от XSS
+header("Content-Security-Policy: script-src 'self'");
+?>
 <!doctype html>
 <html lang="ru">
 <head>

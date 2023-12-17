@@ -16,10 +16,10 @@ class MessageView
                 <div class="card-body">
                     <h4 class="card-title">
                         <a href="/message.php?id=<?= $message["id"] ?>" class="stretched-link text-decoration-none">
-                            <?= $message["title"] ?>
+                            <?= htmlspecialchars($message["title"]) // экранируем спецсимволы для защиты от XSS  ?>
                         </a>
                     </h4>
-                    <p class="card-text"><?= $message["summary"] ?></p>
+                    <p class="card-text"><?= htmlspecialchars($message["summary"]) ?></p>
                 </div>
             </div>
             <?php
@@ -105,11 +105,11 @@ class MessageView
         <div class="content">
 
             <div class="pb-2 mb-4 border-bottom">
-                <h2><?= $message["title"] ?></h2>
+                <h2><?= htmlspecialchars($message["title"]) ?></h2>
             </div>
-            <p><em><?= $message["author"] ?></em></p>
-            <p><?= $message["summary"] ?></p>
-            <p><?= $message["text"] ?></p>
+            <p><em><?= htmlspecialchars($message["author"]) ?></em></p>
+            <p><?= htmlspecialchars($message["summary"]) ?></p>
+            <p><?= htmlspecialchars($message["text"]) ?></p>
         </div>
         <br>
 
@@ -123,7 +123,7 @@ class MessageView
                     <label for="title" class="col-sm-2 col-form-label">Заголовок</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="title" name="title"
-                               value="<?= $message["title"] ?>" required>
+                               value="<?= htmlspecialchars($message["title"]) ?>" required>
                     </div>
                 </div>
 
@@ -131,7 +131,7 @@ class MessageView
                     <label for="summary" class="col-sm-2 col-form-label">Краткое содержание</label>
                     <div class="col-sm-10">
                         <textarea class="form-control" id="summary" name="summary"
-                                  required><?= $message["summary"] ?></textarea>
+                                  required><?= htmlspecialchars($message["summary"]) ?></textarea>
                     </div>
                 </div>
 
@@ -139,7 +139,7 @@ class MessageView
                     <label for="text" class="col-sm-2 col-form-label">Полное содержание</label>
                     <div class="col-sm-10">
                         <textarea class="form-control" id="text" name="text"
-                                  required><?= $message["text"] ?></textarea>
+                                  required><?= htmlspecialchars($message["text"]) ?></textarea>
                     </div>
                 </div>
 
