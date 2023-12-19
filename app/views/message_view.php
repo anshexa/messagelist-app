@@ -102,6 +102,12 @@ class MessageView
 
     public function renderMessage(array $message): void
     { ?>
+        <div class="pb-3 mb-4">
+            <a href="/" class="link-primary">
+                К списку сообщений
+            </a>
+        </div>
+
         <div class="content">
 
             <div class="pb-2 mb-4 border-bottom">
